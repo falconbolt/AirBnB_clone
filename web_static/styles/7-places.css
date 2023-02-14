@@ -1,26 +1,24 @@
-.places {
-  max-width: 1000px;
-  margin: 0px auto;
-  font-size: 30px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-.places h1 {
-  width: 100%;
-  padding-left: 22px;
+div.container section.places {
+	text-align: center;
+	/* margins were not stated in the problem */
+	margin: auto 2%;
 }
 
-.places article {
-  width: 390px;
-  padding: 20px;
-  margin: 20px;
-  border: 1px solid red;
-  border-radius: 4px;
-  display: flex;
-  justify-content: center;
+div.container section.places h1 {
+	font-size: 30px;
+	text-align: left;
 }
 
-.places article h2 {
-  font-size: 30px;
+div.container section.places article {
+	width: 390px;
+	padding: 20px;
+	margin: 20px;
+	border: 1px solid #FF5A5F;
+	border-radius: 4px;
+	display: inline-block;
+}
+
+section.places article h2 {
+	font-size: 30px;
+	text-align: center;
 }
