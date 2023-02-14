@@ -1,4 +1,8 @@
-#!/usr/bin/python3
+#!/bin/usr/python3
 """
-    engine init file
+Init for models module
 """
+from models.engine.file_storage import FileStorage
+
+storage = FileStorage()
+storage.reload()

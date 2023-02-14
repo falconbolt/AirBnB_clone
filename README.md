@@ -1,142 +1,101 @@
-## Introduction
+# AirBnB Clone ― The ALX-Holberton BnB
+![Optional Text](hbnb.png)
+## Description of the project
+The ALX-Holberton B&B sums up the implementation of my four months of studies at the ALX-Holberton School - the fullstack software engineering program.
+The goal of the project is to deploy a replica of the [Airbnb Website](https://www.airbnb.com/) using my server. The final version of this project will have:
+- A command interpreter to manipulate data without a visual interface, like a shell (for development and debugging)
+- A website (front-end) with static and dynamic functionalities
+- A comprehensive database to manage the backend functionalities
+- An API that provides a communication interface between the front and backend of the system.
 
-The AirBnB Clone Project is an attempt to create a clone of the AirBnB site with some of the features of the real AirBnB website.
+### General concepts in review
+As you navigate this code base, it is great to note the following concepts, while completing this project.
+- How to create a Python package
+- How to create a command interpreter in Python using the cmd module
+- What is Unit testing and how to implement it in a large project
+- How to serialize and deserialize a Class
+- How to write and read a JSON file
+- How to manage datetime
+- What is an UUID
+- What is *args and how to use it
+- What is **kwargs and how to use it
+- How to handle named arguments in a function
 
-The Basic Goals:
+## Files and Directories
+- ```models``` directory will contain all classes used for the entire project. A class, called “model” in a OOP project is the representation of an object/instance.
+- ```tests``` directory will contain all unit tests.
+- ```console.py``` file is the entry point of our command interpreter.
+- ```models/base_model.py``` file is the base class of all our models. It contains common elements:
+    - attributes: ```id```, ```created_at``` and ```updated_at```
+    - methods: ```save()``` and ```to_json()```
+- ```models/engine``` directory will contain all storage classes (using the same prototype). For the moment I will have only one: ```file_storage.py```.
 
-* A command interpreter to manipulate data without a visual interface, like in a Shell (for development and debugging)
+The project's implementation will happen in the following phases:
+## Phase One
+The first phase is to manipulate a powerful storage system to give an abstraction between objects and how they are stored and persisted. To achieve this, I will:
+- put in place a parent class (called ```BaseModel```) to take care of the initialization, serialization and deserialization of my future instances
+- create a simple flow of serialization/deserialization: Instance <-> Dictionary <-> JSON string <-> file
+- create all classes used for AirBnB (```User, State, City, Place…```) that inherit from ```BaseModel```
+- create the first abstracted storage engine of the project: File storage.
+- create all unittests to validate all our classes and storage engine
+- Create a data model
+- Manage (create, update, destroy, etc) objects via a console/command interpreter
+- Store and persist objects to files (JSON files)
+S
+## Description of the command interpreter
+| Commands  | Description |
+| ------------- | ------------- |
+| ```quit```  | Quits the console  |
+| ```Ctrl+D```  | Quits the console  |
+| ```help``` or ```help <command>```  | Displays all commands or Displays instructions for a specific command
+| ```create <class>```  | Creates an object of type , saves it to a JSON file, and prints the objects ID
+| ```show <class> <ID>```  | Shows string representation of an object
+| ```destroy <class> <ID>```  | Deletes an objects
+| ```all or all <class>```  | Prints all string representations of all objects or Prints all string representations of all objects of a specific class
+| ```update <class> <id> <attribute name> "<attribute value>"```  | Updates an object with a certain attribute (new or existing)
+| ```<class>.all()```  | Same as all ```<class>```
+| ```<class>.count()```  | Retrieves the number of objects of a certain class
+| ```<class>.show(<ID>)```  | Same as show ```<class> <ID>```
+| ```<class>.destroy(<ID>)```  | Same as destroy ```<class> <ID>```
+| ```<class>.update(<ID>, <attribute name>, <attribute value>```  | Same as update ```<class> <ID> <attribute name> <attribute value>```
+| ```<class>.update(<ID>, <dictionary representation>)```  | Updates an objects based on a dictionary representation of attribute names and values
 
-* A website (front-end) that shows the final product: static and dynamic
-
-* A database of files thats store data i.e. objects
-
-* An API that provides a communication interface between front-end and data (reterive, create, delete, update)
-
-## Description
-
-The Command Interpreter
-
-* The Base Model parent class which will be the base for other classes that store our data e.g. User, State, City, Review, Place, Amenity
-
-* The Base Model class will initialize, serialize, and deserialize future instances
-
-* An instance will be converted to a dictionary, serialized to a JSON string, and then saved to a storage file
-
-* Classes includes are User, State, City, Place, Review, Amenity which inherit from Base Model
-
-* Data storage engine, File Storage class which will store our instances and data
-
-* Unittests for these classes, features, and variables
-
-## Features
-
-* Each class instantiated with a universally unique identifier string, created at datetime, and updated at datetime
-
-* User, State, City, Place, Review, and Amenity class which inherit from Base Model class
-
-* The string representation of a class will have the class name, id, and dictionary of attributes
-
-* Each class will be able to save itself, updating the file storage and update at attribute
-
-* A class can be re created using a dictionary representation as the kwargs
-
-* A representation of all the objects instantiated will be available for the classes to access
-
-* A console/command interpreter which will allow for interactive and non interactive use
-
-* CONSOLE COMMANDS:
-	* quit / EOF : can be used to exit the console
-	
-	* help : will provide documentation and help for using the console
-	
-	* create : creates a new instance of a specified class
-	
-	* show : prints the string representation of an instance based on class name and id
-	
-	* destroy : deletes an instance based on class name and id
-	
-	* all : prints string representation of all instances of a specified class or all instances if not specified
-
-	* update : updates an instance based on class name, id and by adding/updating an attribute
-
-## Example
-
-QUIT:
-
+## General Execution
+Your shell should work like this in interactive mode:
 ```
-user@machine: $ ./console.py
-(hbnb) quit
-user@machine: $
-```
-
-HELP:
-
-```
+$ ./console.py
 (hbnb) help
 
-Documented commands type help topic:
+Documented commands (type help <topic>):
+========================================
+EOF  help  quit
+(hbnb) 
+(hbnb) 
+(hbnb) quit
+$
+But also in non-interactive mode: (like the Shell project in C)
 
-EOF  all  create  destroy  help  quit  show  update
+$ echo "help" | ./console.py
+(hbnb)
 
-(hbnb) help all
-Prints all string representation of instances based or not on class
-        name:  all BaseModel
-	    :  all
+Documented commands (type help <topic>):
+========================================
+EOF  help  quit
+(hbnb) 
+$
+$ cat test_help
+help
+$
+$ cat test_help | ./console.py
+(hbnb)
+
+Documented commands (type help <topic>):
+========================================
+EOF  help  quit
+(hbnb)
+$
 ```
-
-ALL:
-
-```
-(hbnb) all
-["[User] (2f0b1cc8-0207-4012-a9de-e784bcc37068) {'updated_at': datetime.datetime(2019, 2, 20, 0, 29, 9, 837924), 'id': '2f0b1cc8-0207-4012-a9de-e784bcc37068', 'created_at': datetime.datetime(2021, 2, 20, 0, 29, 9, 837924)}", "[State] (720dbe47-a8fc-4db1-9206-5ec5f932caab) {'updated_at': datetime.datetime(2019, 2, 20, 0, 29, 9, 810951), 'id': '720dbe47-a8fc-4db1-9206-5ec5f932caab', 'created_at': datetime.datetime(2019, 2, 20, 0, 29, 9, 810951)}"]
-```
-
-CREATE:
-
-```
-(hbnb) create <class_name>
-0b08e2a1-c317-4483-a872-5fd3bb34cb00
-```
-
-DESTROY:
-
-```
-(hbnb) destroy <class_name> <id>
-```
-
-SHOW:
-
-```
-(hbnb) show <class_name> <id>
-["[<class_name>] (<id>) {'updated_at': datetim    e.datetime(2019, 2, 20, 0, 29, 9, 837924), 'id': '<id>', 'created_at': datetime.datetime(2019, 2, 20, 2, 29,     9, 837924)}"]
-```
-
-UPDATE:
-
-```
-(hbnb) update <class_name> <id> <attribute> <value>
-```
-
-NON INTERACTIVE MODE:
-
-```
-user@machine: $ echo "yourcommand and arguments" | ./console.py
-(hbnb) yourcommand results
-```
-
-### Files
-
----
-File|Description
----|---
-console.py | command interpreter for testing and development
-models/base_model.py | Base model parent class with id, updated_at, created_at
-models/amenity.py | Amenity class inherits from base_model
-models/city.py | City class inherits from base_model
-models/state.py | State class inherits from base_model
-models/review.py | Review class inherits from base_model
-models/user.py | User class inherits from base_model
-models/engine/file_storage.py | File storage engine which will store all instances for later use.
-tests/test_models/test_engine | test heirarchy which will contain corresponding unittest for each of the classes in non tests directory.
-
-
+## Final Product
+![alt](https://s3.amazonaws.com/alx-intranet.hbtn.io/uploads/medias/2020/9/fe2e3e7701dec72ce612472dab9bb55fe0e9f6d4.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIARDDGGGOU65GPZGY3%2F20210226%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20210226T091352Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=8ad0ced94d77d100be587f30d4af3734acf12d2b05b803b084cd11ce51bf68f4)
+## Data Diagram
+![alt](https://s3.amazonaws.com/alx-intranet.hbtn.io/uploads/medias/2020/9/99e1a8f2be8c09d5ce5ac321e8cf39f0917f8db5.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIARDDGGGOU65GPZGY3%2F20210226%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20210226T091352Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=a4013a9239416a982d703d1ac725e63a9b35593900d197534d087b71f813441c)
